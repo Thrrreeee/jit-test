@@ -22,11 +22,6 @@ int main(int argc,char *argv[]){
     ExitOnErr.setBanner(std::string(argv[0]) + ":");
 
     auto J = ExitOnErr(LLJITBuilder().create());
-    std::string DyLibPath = "/home/jinrui/coremark_pro_x86tox86/va_listHelperFunc.so";
-    if (llvm::sys::DynamicLibrary::LoadLibraryPermanently(DyLibPath.c_str())) {
-        outs() << "无法加载 " << DyLibPath << "\n";
-        return 1;
-    }
     // auto M = ExitOnErr(parseExampleModuleFromFile("tls-c.ll"));
     auto M = ExitOnErr(parseExampleModuleFromFile("tls-cpp.ll"));
     ExitOnErr(J->addIRModule(std::move(M)));
