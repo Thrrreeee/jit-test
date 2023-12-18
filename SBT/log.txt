@@ -1,0 +1,61 @@
+filePath-MultiThreadTLS-test: /home/jinrui/llvm-project-main/llvm/lib/CodeGen/SelectionDAG/TargetLowering.cpp:9740: virtual SDValue llvm::TargetLowering::LowerToTLSEmulatedModel(const GlobalAddressSDNode *, SelectionDAG &) const: Assertion `EmuTlsVar && "Cannot find EmuTlsVar "' failed.
+PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
+Stack dump:
+0.	Program arguments: ./filePath-MultiThreadTLS-test ./filePath-MultiThreadTLS-test
+1.	Running pass 'Function Pass Manager' on module '/home/jinrui/coremark_pro_x86tox86/maze.bc'.
+2.	Running pass 'X86 DAG->DAG Instruction Selection' on function '@sub_401000__init_proc'
+ #0 0x00007f8bfac5afdd llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) /home/jinrui/llvm-project-main/llvm/lib/Support/Unix/Signals.inc:723:11
+ #1 0x00007f8bfac5b4cb PrintStackTraceSignalHandler(void*) /home/jinrui/llvm-project-main/llvm/lib/Support/Unix/Signals.inc:798:1
+ #2 0x00007f8bfac59536 llvm::sys::RunSignalHandlers() /home/jinrui/llvm-project-main/llvm/lib/Support/Signals.cpp:105:5
+ #3 0x00007f8bfac5bc85 SignalHandler(int) /home/jinrui/llvm-project-main/llvm/lib/Support/Unix/Signals.inc:413:1
+ #4 0x00007f8bfa3f5520 (/lib/x86_64-linux-gnu/libc.so.6+0x42520)
+ #5 0x00007f8bfa449a7c __pthread_kill_implementation ./nptl/pthread_kill.c:44:76
+ #6 0x00007f8bfa449a7c __pthread_kill_internal ./nptl/pthread_kill.c:78:10
+ #7 0x00007f8bfa449a7c pthread_kill ./nptl/pthread_kill.c:89:10
+ #8 0x00007f8bfa3f5476 gsignal ./signal/../sysdeps/posix/raise.c:27:6
+ #9 0x00007f8bfa3db7f3 abort ./stdlib/abort.c:81:7
+#10 0x00007f8bfa3db71b _nl_load_domain ./intl/loadmsgcat.c:1177:9
+#11 0x00007f8bfa3ece96 (/lib/x86_64-linux-gnu/libc.so.6+0x39e96)
+#12 0x00007f8c0334ea34 llvm::TargetLowering::LowerToTLSEmulatedModel(llvm::GlobalAddressSDNode const*, llvm::SelectionDAG&) const /home/jinrui/llvm-project-main/llvm/lib/CodeGen/SelectionDAG/TargetLowering.cpp:9741:16
+#13 0x00007f8c03f87437 llvm::X86TargetLowering::LowerGlobalTLSAddress(llvm::SDValue, llvm::SelectionDAG&) const /home/jinrui/llvm-project-main/llvm/lib/Target/X86/X86ISelLowering.cpp:18554:12
+#14 0x00007f8c03fcdbfd llvm::X86TargetLowering::LowerOperation(llvm::SDValue, llvm::SelectionDAG&) const /home/jinrui/llvm-project-main/llvm/lib/Target/X86/X86ISelLowering.cpp:31780:40
+#15 0x00007f8c0302f438 (anonymous namespace)::SelectionDAGLegalize::LegalizeOp(llvm::SDNode*) /home/jinrui/llvm-project-main/llvm/lib/CodeGen/SelectionDAG/LegalizeDAG.cpp:1308:29
+#16 0x00007f8c0302dad4 llvm::SelectionDAG::Legalize() /home/jinrui/llvm-project-main/llvm/lib/CodeGen/SelectionDAG/LegalizeDAG.cpp:5587:13
+#17 0x00007f8c032aba31 llvm::SelectionDAGISel::CodeGenAndEmitDAG() /home/jinrui/llvm-project-main/llvm/lib/CodeGen/SelectionDAG/SelectionDAGISel.cpp:906:3
+#18 0x00007f8c032aa89d llvm::SelectionDAGISel::SelectBasicBlock(llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, true, false, void>, false, true>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, true, false, void>, false, true>, bool&) /home/jinrui/llvm-project-main/llvm/lib/CodeGen/SelectionDAG/SelectionDAGISel.cpp:702:1
+#19 0x00007f8c032aa2d6 llvm::SelectionDAGISel::SelectAllBasicBlocks(llvm::Function const&) /home/jinrui/llvm-project-main/llvm/lib/CodeGen/SelectionDAG/SelectionDAGISel.cpp:1707:11
+#20 0x00007f8c032a7817 llvm::SelectionDAGISel::runOnMachineFunction(llvm::MachineFunction&) /home/jinrui/llvm-project-main/llvm/lib/CodeGen/SelectionDAG/SelectionDAGISel.cpp:482:3
+#21 0x00007f8c03f1254a (anonymous namespace)::X86DAGToDAGISel::runOnMachineFunction(llvm::MachineFunction&) /home/jinrui/llvm-project-main/llvm/lib/Target/X86/X86ISelDAGToDAG.cpp:192:7
+#22 0x00007f8bffed292f llvm::MachineFunctionPass::runOnFunction(llvm::Function&) /home/jinrui/llvm-project-main/llvm/lib/CodeGen/MachineFunctionPass.cpp:91:8
+#23 0x00007f8bfb423d9a llvm::FPPassManager::runOnFunction(llvm::Function&) /home/jinrui/llvm-project-main/llvm/lib/IR/LegacyPassManager.cpp:1435:23
+#24 0x00007f8bfb428bb2 llvm::FPPassManager::runOnModule(llvm::Module&) /home/jinrui/llvm-project-main/llvm/lib/IR/LegacyPassManager.cpp:1481:16
+#25 0x00007f8bfb42464b (anonymous namespace)::MPPassManager::runOnModule(llvm::Module&) /home/jinrui/llvm-project-main/llvm/lib/IR/LegacyPassManager.cpp:1550:23
+#26 0x00007f8bfb4241ca llvm::legacy::PassManagerImpl::run(llvm::Module&) /home/jinrui/llvm-project-main/llvm/lib/IR/LegacyPassManager.cpp:535:16
+#27 0x00007f8bfb428e91 llvm::legacy::PassManager::run(llvm::Module&) /home/jinrui/llvm-project-main/llvm/lib/IR/LegacyPassManager.cpp:1677:3
+#28 0x00007f8c025ea52e llvm::orc::SimpleCompiler::operator()(llvm::Module&) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/CompileUtils.cpp:54:3
+#29 0x00007f8c02721542 decltype(auto) llvm::orc::ThreadSafeModule::withModuleDo<llvm::orc::IRCompileLayer::IRCompiler&>(llvm::orc::IRCompileLayer::IRCompiler&) /home/jinrui/llvm-project-main/llvm/include/llvm/ExecutionEngine/Orc/ThreadSafeModule.h:137:3
+#30 0x00007f8c0272111c llvm::orc::IRCompileLayer::emit(std::unique_ptr<llvm::orc::MaterializationResponsibility, std::default_delete<llvm::orc::MaterializationResponsibility>>, llvm::orc::ThreadSafeModule) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/IRCompileLayer.cpp:32:12
+#31 0x00007f8c02722519 llvm::orc::IRTransformLayer::emit(std::unique_ptr<llvm::orc::MaterializationResponsibility, std::default_delete<llvm::orc::MaterializationResponsibility>>, llvm::orc::ThreadSafeModule) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/IRTransformLayer.cpp:25:5
+#32 0x00007f8c02722519 llvm::orc::IRTransformLayer::emit(std::unique_ptr<llvm::orc::MaterializationResponsibility, std::default_delete<llvm::orc::MaterializationResponsibility>>, llvm::orc::ThreadSafeModule) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/IRTransformLayer.cpp:25:5
+#33 0x00007f8c0272ebb5 llvm::orc::BasicIRLayerMaterializationUnit::materialize(std::unique_ptr<llvm::orc::MaterializationResponsibility, std::default_delete<llvm::orc::MaterializationResponsibility>>) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/Layer.cpp:158:3
+#34 0x00007f8c025f70a0 llvm::orc::MaterializationTask::run() /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/Core.cpp:1921:35
+#35 0x00007f8c0261216a llvm::orc::ExecutionSession::runOnCurrentThread(std::unique_ptr<llvm::orc::Task, std::default_delete<llvm::orc::Task>>) /home/jinrui/llvm-project-main/llvm/include/llvm/ExecutionEngine/Orc/Core.h:1718:71
+#36 0x00007f8c0264679a void llvm::detail::UniqueFunctionBase<void, std::unique_ptr<llvm::orc::Task, std::default_delete<llvm::orc::Task>>>::CallImpl<void (*)(std::unique_ptr<llvm::orc::Task, std::default_delete<llvm::orc::Task>>)>(void*, std::unique_ptr<llvm::orc::Task, std::default_delete<llvm::orc::Task>>&) /home/jinrui/llvm-project-main/llvm/include/llvm/ADT/FunctionExtras.h:220:5
+#37 0x00007f8c0261628b llvm::unique_function<void (std::unique_ptr<llvm::orc::Task, std::default_delete<llvm::orc::Task>>)>::operator()(std::unique_ptr<llvm::orc::Task, std::default_delete<llvm::orc::Task>>) /home/jinrui/llvm-project-main/llvm/include/llvm/ADT/FunctionExtras.h:382:5
+#38 0x00007f8c0260b87d llvm::orc::ExecutionSession::dispatchTask(std::unique_ptr<llvm::orc::Task, std::default_delete<llvm::orc::Task>>) /home/jinrui/llvm-project-main/llvm/include/llvm/ExecutionEngine/Orc/Core.h:1609:5
+#39 0x00007f8c025f81ec llvm::orc::ExecutionSession::dispatchOutstandingMUs() /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/Core.cpp:2309:5
+#40 0x00007f8c025f9b56 llvm::orc::ExecutionSession::OL_completeLookup(std::unique_ptr<llvm::orc::InProgressLookupState, std::default_delete<llvm::orc::InProgressLookupState>>, std::shared_ptr<llvm::orc::AsynchronousSymbolQuery>, std::function<void (llvm::DenseMap<llvm::orc::JITDylib*, llvm::DenseSet<llvm::orc::SymbolStringPtr, llvm::DenseMapInfo<llvm::orc::SymbolStringPtr, void>>, llvm::DenseMapInfo<llvm::orc::JITDylib*, void>, llvm::detail::DenseMapPair<llvm::orc::JITDylib*, llvm::DenseSet<llvm::orc::SymbolStringPtr, llvm::DenseMapInfo<llvm::orc::SymbolStringPtr, void>>>> const&)>) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/Core.cpp:2920:1
+#41 0x00007f8c0264af03 llvm::orc::InProgressFullLookupState::complete(std::unique_ptr<llvm::orc::InProgressLookupState, std::default_delete<llvm::orc::InProgressLookupState>>) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/Core.cpp:580:5
+#42 0x00007f8c025f1f93 llvm::orc::ExecutionSession::OL_applyQueryPhase1(std::unique_ptr<llvm::orc::InProgressLookupState, std::default_delete<llvm::orc::InProgressLookupState>>, llvm::Error) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/Core.cpp:2675:5
+#43 0x00007f8c025f0140 llvm::orc::ExecutionSession::lookup(llvm::orc::LookupKind, std::vector<std::pair<llvm::orc::JITDylib*, llvm::orc::JITDylibLookupFlags>, std::allocator<std::pair<llvm::orc::JITDylib*, llvm::orc::JITDylibLookupFlags>>> const&, llvm::orc::SymbolLookupSet, llvm::orc::SymbolState, llvm::unique_function<void (llvm::Expected<llvm::DenseMap<llvm::orc::SymbolStringPtr, llvm::orc::ExecutorSymbolDef, llvm::DenseMapInfo<llvm::orc::SymbolStringPtr, void>, llvm::detail::DenseMapPair<llvm::orc::SymbolStringPtr, llvm::orc::ExecutorSymbolDef>>>)>, std::function<void (llvm::DenseMap<llvm::orc::JITDylib*, llvm::DenseSet<llvm::orc::SymbolStringPtr, llvm::DenseMapInfo<llvm::orc::SymbolStringPtr, void>>, llvm::DenseMapInfo<llvm::orc::JITDylib*, void>, llvm::detail::DenseMapPair<llvm::orc::JITDylib*, llvm::DenseSet<llvm::orc::SymbolStringPtr, llvm::DenseMapInfo<llvm::orc::SymbolStringPtr, void>>>> const&)>) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/Core.cpp:2147:3
+#44 0x00007f8c025f83bd llvm::orc::ExecutionSession::lookup(std::vector<std::pair<llvm::orc::JITDylib*, llvm::orc::JITDylibLookupFlags>, std::allocator<std::pair<llvm::orc::JITDylib*, llvm::orc::JITDylibLookupFlags>>> const&, llvm::orc::SymbolLookupSet, llvm::orc::LookupKind, llvm::orc::SymbolState, std::function<void (llvm::DenseMap<llvm::orc::JITDylib*, llvm::DenseSet<llvm::orc::SymbolStringPtr, llvm::DenseMapInfo<llvm::orc::SymbolStringPtr, void>>, llvm::DenseMapInfo<llvm::orc::JITDylib*, void>, llvm::detail::DenseMapPair<llvm::orc::JITDylib*, llvm::DenseSet<llvm::orc::SymbolStringPtr, llvm::DenseMapInfo<llvm::orc::SymbolStringPtr, void>>>> const&)>) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/Core.cpp:2184:3
+#45 0x00007f8c025f8633 llvm::orc::ExecutionSession::lookup(std::vector<std::pair<llvm::orc::JITDylib*, llvm::orc::JITDylibLookupFlags>, std::allocator<std::pair<llvm::orc::JITDylib*, llvm::orc::JITDylibLookupFlags>>> const&, llvm::orc::SymbolStringPtr, llvm::orc::SymbolState) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/Core.cpp:2209:24
+#46 0x00007f8c027351a0 llvm::orc::LLJIT::lookupLinkerMangled(llvm::orc::JITDylib&, llvm::orc::SymbolStringPtr) /home/jinrui/llvm-project-main/llvm/lib/ExecutionEngine/Orc/LLJIT.cpp:881:18
+#47 0x000055983e780079 llvm::orc::LLJIT::lookupLinkerMangled(llvm::orc::JITDylib&, llvm::StringRef) /home/jinrui/llvm-project-main/llvm/include/llvm/ExecutionEngine/Orc/LLJIT.h:164:5
+#48 0x000055983e77ffe7 llvm::orc::LLJIT::lookup(llvm::orc::JITDylib&, llvm::StringRef) /home/jinrui/llvm-project-main/llvm/include/llvm/ExecutionEngine/Orc/LLJIT.h:176:5
+#49 0x000055983e778964 llvm::orc::LLJIT::lookup(llvm::StringRef) /home/jinrui/llvm-project-main/llvm/include/llvm/ExecutionEngine/Orc/LLJIT.h:181:12
+#50 0x000055983e7779ba main /home/jinrui/llvm-project-main/sjr-test/SBTtest/filePath-MultiThreadTLS-test.cpp:50:23
+#51 0x00007f8bfa3dcd90 __libc_start_call_main ./csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+#52 0x00007f8bfa3dce40 call_init ./csu/../csu/libc-start.c:128:20
+#53 0x00007f8bfa3dce40 __libc_start_main ./csu/../csu/libc-start.c:379:5
+#54 0x000055983e777475 _start (./filePath-MultiThreadTLS-test+0x6475)
