@@ -27,8 +27,8 @@ int main(int argc,char *argv[]){
         outs() << "无法加载 " << DyLibPath << "\n";
         return 1;
     }
-    // auto M = ExitOnErr(parseExampleModuleFromFile("/home/jinrui/coremark_pro_x86tox86/maze_noThread.ll"));
-    auto M = ExitOnErr(parseExampleModuleFromFile("/home/jinrui/coremark_pro_x86tox86/Thread-test/tls-cpp.ll"));
+    // auto M = ExitOnErr(parseExampleModuleFromFile("tls-c.ll"));
+    auto M = ExitOnErr(parseExampleModuleFromFile("tls-cpp.ll"));
     ExitOnErr(J->addIRModule(std::move(M)));
     outs() << "Load bitcode file successful!" << "\n";
 
