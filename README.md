@@ -5,4 +5,4 @@ I used the commands `clang++ -S -emit-llvm tls.cpp -o tls-cpp.ll` and `clang -S 
 
 I've noticed that if I debug at the `LowerToTLSEmulatedModel()`(https://github.com/llvm/llvm-project/blob/fc715e4cd942612a091097339841733757b53824/llvm/lib/CodeGen/SelectionDAG/TargetLowering.cpp#L9849) breakpoint, the IR file compiled from C++ triggers this breakpoint during `J->initialize(J->getMainJITDylib())`. However, for the IR file compiled from C, it triggers this breakpoint during `auto AddrOfMain = ExitOnErr(J->lookup('main'))`.
 
-
+In the 'SBT' folder, there are my source code, input IR files, and error messages.From the error messages, it seems to be related to TLS variables, so I plan to use my own written example to study the ORCJIT's handling process of TLS variables.
