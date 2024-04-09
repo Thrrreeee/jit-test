@@ -23,31 +23,29 @@ using namespace llvm::orc;
 
 ExitOnError ExitOnErr;
 int main(int argc,char *argv[]){
-    // 初始化LLVM
+    // initialize LLVM
     InitLLVM X(argc,argv);
     
     llvm::InitializeNativeTarget();
     llvm::InitializeNativeTargetAsmPrinter();
 
-    // 创建LLJITBuilder实例
+    // create LLJITBuilder instance
     LLJITBuilder Builder;
 
-    // 配置JITTargetMachineBuilder
+    // set JITTargetMachineBuilder
     if (auto JTMB = JITTargetMachineBuilder::detectHost()) {
         // 修改JITTargetMachineBuilder的选项
         JTMB->getOptions().EmulatedTLS = false;
         JTMB->getOptions().EmitAddrsig = true;
-
-        // 设置JITTargetMachineBuilder
         Builder.setJITTargetMachineBuilder(std::move(*JTMB));
     } else {
-        // 处理错误
+        // handle error
         return 1;
     }
 
     auto J = ExitOnErr(Builder.create());
 
-    auto M = ExitOnErr(parseExampleModuleFromBitCodeFile("/home/sole/coremark_pro_x86tox86/aliasTest/alias-use-list-order.bc"));
+    auto M = ExitOnErr(parseExampleModuleFromFile("aliasTest/aliasTest.ll"));
 
 
     ExitOnErr(J->addIRModule(std::move(M)));
